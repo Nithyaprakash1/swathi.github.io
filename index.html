@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOOMSDAY PROTOCOL</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- CORE SETTINGS --- */
+        :root {
+            --doom-green: #39ff14;
+            --doom-green-dim: rgba(57, 255, 20, 0.2);
+            --glass-surface: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-black: #000000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-black);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Cinzel', serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* --- 1. BACKGROUND LAYERS --- */
+        .video-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            filter: grayscale(1) contrast(1.2);
+            z-index: 0;
+        }
+
+        .plasma-bg {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #0f1f0f 0%, #000000 100%);
+            z-index: -1;
+        }
+
+        /* --- 2. CLICK-TO-START OVERLAY --- */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.8s ease;
+        }
+
+        .overlay h2 {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--doom-green);
+            font-size: 2rem;
+            letter-spacing: 5px;
+            animation: blink 1s infinite;
+        }
+
+        .overlay p {
+            color: #888;
+            margin-top: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- 3. MAIN CONTAINER --- */
+        .container {
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 1400px;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .marvel-logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 12px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--doom-green);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 60px;
+        }
+
+        .text-avengers {
+            display: block;
+            font-size: 5vw;
+            background: linear-gradient(to bottom, #fff 0%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+        }
+
+        .text-doom {
+            display: block;
+            font-size: 8vw;
+            color: var(--doom-green);
+            text-shadow: 0 0 30px var(--doom-green);
+            background: linear-gradient(90deg, var(--doom-green) 0%, #fff 50%, var(--doom-green) 100%);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: liquidFlow 3s linear infinite;
+        }
+
+        @keyframes liquidFlow {
+            0% { background-position: 100%; }
+            100% { background-position: -100%; }
+        }
+
+        /* --- 4. GLASS CARDS --- */
+        .timer-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .glass-card {
+            background: var(--glass-surface);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 3px solid var(--doom-green);
+            padding: 30px 40px;
+            border-radius: 20px;
+            min-width: 180px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .glass-card:hover { transform: translateY(-5px); }
+
+        .number {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 6rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: block;
+        }
+
+        .label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--doom-green);
+            font-weight: bold;
+        }
+
+        /* --- ANIMATION UTILS --- */
+
+        /* Green Glitch (Tick) */
+        .tick-active {
+            animation: glitchGreen 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            color: var(--doom-green);
+            text-shadow: 4px 0 #fff;
+        }
+
+        /* White Glitch (Tack) */
+        .tack-active {
+            animation: glitchWhite 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            color: white;
+            text-shadow: 4px 0 var(--doom-green);
+        }
+
+        @keyframes glitchGreen {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes glitchWhite {
+            0% { transform: translate(0); }
+            20% { transform: translate(3px, -3px); }
+            40% { transform: translate(3px, 3px); }
+            60% { transform: translate(-3px, 3px); }
+            80% { transform: translate(-3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .text-avengers { font-size: 3rem; }
+            .text-doom { font-size: 4rem; }
+            .glass-card { min-width: 100px; padding: 15px; }
+            .number { font-size: 3rem; }
+            .label { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VIDEO BACKGROUND (Ensure doom.jpg or .mp4 exists) -->
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="doom.jpg" type="image/jpg">
+    </video>
+    <div class="plasma-bg"></div>
+
+    <!-- FORCE START OVERLAY -->
+    <div class="overlay" id="overlay">
+        <h2><i class="fa-solid fa-lock"></i> SYSTEM LOCKED</h2>
+        <p>TAP ANYWHERE TO INITIALIZE PROTOCOL</p>
+    </div>
+
+    <!-- MAIN UI -->
+    <div class="container" id="main-ui">
+        <p class="marvel-logo">Nithya Prakash's</p>
+        <h1>
+            <span class="text-avengers">Advance Happy Birthday</span>
+            <span class="text-doom">My Dearest Ammu</span>
+        </h1>
+
+        <div class="timer-wrapper">
+            <div class="glass-card">
+                <span class="number" id="days">000</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="glass-card">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="glass-card">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="glass-card">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO FILES -->
+    <audio id="bg-audio" loop>
+        <source src="./sounds/background.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- TICK MP3 (Must be exactly 2 seconds long: Tick at 0s, Tack at 1s) -->
+    <audio id="tick-audio" loop>
+        <source src="./sounds/tick.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // --- 1. SETTINGS ---
+        // Target: May 7, 2026, 12:00:00
+        const targetDate = new Date("May 7, 2026 12:00:00").getTime();
+
+        // Elements
+        const overlay = document.getElementById('overlay');
+        const mainUi = document.getElementById('main-ui');
+        const bgAudio = document.getElementById('bg-audio');
+        const tickAudio = document.getElementById('tick-audio');
+
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minsEl = document.getElementById('minutes');
+        const secsEl = document.getElementById('seconds');
+
+        let audioAllowed = false;
+
+        // --- 2. ACTIVATION SEQUENCE ---
+        overlay.addEventListener('click', () => {
+            audioAllowed = true;
+
+            // 1. Play Background Drone
+            bgAudio.volume = 0.5;
+            bgAudio.play().catch(e => console.error("BG Audio Error:", e));
+
+            // 2. Play Tick Loop (2 Second Audio)
+            // It will loop indefinitely: Tick..Tack..Tick..Tack..
+            tickAudio.volume = 1.0;
+            tickAudio.play().catch(e => console.error("Tick Audio Error:", e));
+
+            // 3. Reveal UI
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                mainUi.style.opacity = '1';
+            }, 800);
+        });
+
+        // --- 3. COUNTDOWN ENGINE ---
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                // DOOM ARRIVED
+                document.querySelector('.text-avengers').innerText = "DOOM";
+                document.querySelector('.text-doom').innerText = "IS HERE";
+                document.querySelector('.timer-wrapper').style.display = 'none';
+                // Stop audio on arrival if desired
+                tickAudio.pause();
+                return;
+            }
+
+            // Math
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display
+            daysEl.innerText = days < 10 ? '0' + days : days;
+            hoursEl.innerText = hours < 10 ? '0' + hours : hours;
+            minsEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+
+            const secString = seconds < 10 ? '0' + seconds : seconds;
+
+            // --- VISUAL SYNC LOGIC ---
+            // Triggers animation when number changes
+            if (secsEl.innerText !== secString) {
+                secsEl.innerText = secString;
+
+                // Even Number = Tick Visual (Green)
+                // Odd Number = Tack Visual (White)
+                if (seconds % 2 === 0) {
+                    secsEl.classList.remove('tack-active');
+                    secsEl.classList.add('tick-active');
+                } else {
+                    secsEl.classList.remove('tick-active');
+                    secsEl.classList.add('tack-active');
+                }
+
+                // Clean up classes for next animation
+                setTimeout(() => {
+                    secsEl.classList.remove('tick-active');
+                    secsEl.classList.remove('tack-active');
+                }, 190);
+            }
+        }
+
+        // Precision Interval
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+    </script>
+</body>
+</html>
