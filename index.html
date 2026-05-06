@@ -28,7 +28,7 @@
         /* Custom Cursor for PC only */
         @media (pointer: fine) { * { cursor: none; } }
 
-        body {
+        body, html {
             background-color: var(--bg);
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: #ffffff;
@@ -255,7 +255,7 @@
         .signature-box h2 { font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 10px; color: #fff; }
         .signature-box p { font-size: 1.1rem; color: #aaa; margin-bottom: 30px; }
         .canvas-container { position: relative; background: rgba(255, 255, 255, 0.05); border: 2px dashed var(--purple); border-radius: 20px; overflow: hidden; margin: 0 auto 30px auto; width: 320px; height: 200px; box-shadow: 0 0 30px rgba(168, 85, 247, 0.2); }
-        #signCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: none; /* Prevents scroll while drawing */ }
+        #signCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
         .controls { display: flex; justify-content: center; gap: 15px; }
         .btn { padding: 12px 30px; border-radius: 100px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; font-size: 0.8rem; border: none; }
         .btn-clear { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; }
@@ -266,7 +266,7 @@
         /* Certificate Box */
         .certificate-box { text-align: center; max-width: 700px; width: 100%; opacity: 0; transform: scale(1.1); pointer-events: none; transition: opacity 0.8s ease, transform 0.8s ease; position: absolute; z-index: 15; display: flex; flex-direction: column; align-items: center;}
         .certificate-box.active { opacity: 1; transform: scale(1); pointer-events: auto; position: relative; }
-        .cert-border { background: #080312; border: 1px solid var(--electric); padding: 50px 30px; border-radius: 15px; box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); position: relative; width: 100%; } /* Solid background for PDF capture */
+        .cert-border { background: #080312; border: 1px solid var(--electric); padding: 50px 30px; border-radius: 15px; box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); position: relative; width: 100%; }
         .cert-seal { font-size: 3.5rem; margin-bottom: 10px; animation: float 3s infinite ease-in-out; }
         .cert-title { font-size: clamp(2rem, 6vw, 3rem); font-family: serif; font-style: italic; color: var(--electric); margin-bottom: 10px; text-shadow: 0 0 15px var(--electric); }
         .cert-sub { font-size: 1rem; color: #ccc; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 3px; }
@@ -374,10 +374,10 @@
         </div>
 
         <div class="vortex-container">
-            <img src="6.jpeg" class="vortex-img v-1" data-depth="0.05">
-            <img src="5.jpeg" class="vortex-img v-2" data-depth="0.15">
-            <img src="4.jpeg" class="vortex-img v-3" data-depth="0.1">
-            <img src="10.jpeg" class="vortex-img v-4" data-depth="0.08">
+            <img src="6.JPEG" class="vortex-img v-1" data-depth="0.05">
+            <img src="5.JPEG" class="vortex-img v-2" data-depth="0.15">
+            <img src="4.JPEG" class="vortex-img v-3" data-depth="0.1">
+            <img src="10.JPEG" class="vortex-img v-4" data-depth="0.08">
         </div>
     </section>
 
@@ -422,14 +422,14 @@
             <div id="neonPopText" class="neon-pop">Princess 👑</div>
 
             <div class="deck" id="cardDeck">
-                <div class="shuffle-card" onclick="openLightbox('1.jpeg')"><img src="1.jpeg" alt="Memory"></div>
-                <div class="shuffle-card" onclick="openLightbox('2.jpeg')"><img src="2.jpeg" alt="Memory"></div>
-                <div class="shuffle-card" onclick="openLightbox('3.jpeg')"><img src="3.jpeg" alt="Memory"></div>
-                <div class="shuffle-card" onclick="openLightbox('4.jpeg')"><img src="4.jpeg" alt="Memory"></div>
-                <div class="shuffle-card" onclick="openLightbox('5.jpeg')"><img src="5.jpeg" alt="Memory"></div>
-                <div class="shuffle-card" onclick="openLightbox('9.jpeg')"><img src="9.jpeg" alt="Memory"></div>
-                <div class="shuffle-card" onclick="openLightbox('7.jpeg')"><img src="7.jpeg" alt="Memory"></div>
-                <div class="shuffle-card" onclick="openLightbox('8.jpeg')"><img src="8.jpeg" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('1.JPEG')"><img src="1.JPEG" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('2.JPEG')"><img src="2.JPEG" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('3.JPEG')"><img src="3.JPEG" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('4.JPEG')"><img src="4.JPEG" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('5.JPEG')"><img src="5.JPEG" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('9.JPEG')"><img src="9.JPEG" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('7.JPEG')"><img src="7.JPEG" alt="Memory"></div>
+                <div class="shuffle-card" onclick="openLightbox('8.JPEG')"><img src="8.JPEG" alt="Memory"></div>
             </div>
         </div>
     </section>
@@ -441,14 +441,14 @@
             <p>Every picture tells the story of us... tap to view closely.</p>
         </div>
         <div class="gallery-grid">
-            <div class="gal-item" onclick="openLightbox('1.jpeg')"><img src="1.jpeg" class="gallery-img"></div>
-            <div class="gal-item" onclick="openLightbox('2.jpeg')"><img src="2.jpeg" class="gallery-img"></div>
-            <div class="gal-item" onclick="openLightbox('3.jpeg')"><img src="3.jpeg" class="gallery-img"></div>
-            <div class="gal-item" onclick="openLightbox('4.jpeg')"><img src="4.jpeg" class="gallery-img"></div>
-            <div class="gal-item" onclick="openLightbox('5.jpeg')"><img src="5.jpeg" class="gallery-img"></div>
-            <div class="gal-item" onclick="openLightbox('9.jpeg')"><img src="9.jpeg" class="gallery-img"></div>
-            <div class="gal-item" onclick="openLightbox('7.jpeg')"><img src="7.jpeg" class="gallery-img"></div>
-            <div class="gal-item" onclick="openLightbox('8.jpeg')"><img src="8.jpeg" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('1.JPEG')"><img src="1.JPEG" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('2.JPEG')"><img src="2.JPEG" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('3.JPEG')"><img src="3.JPEG" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('4.JPEG')"><img src="4.JPEG" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('5.JPEG')"><img src="5.JPEG" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('9.JPEG')"><img src="9.JPEG" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('7.JPEG')"><img src="7.JPEG" class="gallery-img"></div>
+            <div class="gal-item" onclick="openLightbox('8.JPEG')"><img src="8.JPEG" class="gallery-img"></div>
         </div>
     </section>
 
@@ -614,6 +614,9 @@
         const disk = document.getElementById('disk');
         const cursor = document.getElementById('cursor');
 
+        // --- SCROLL FREEZE CONTROL VARIABLES ---
+        let promiseMade = false;
+
         // --- LIGHTBOX LOGIC ---
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -622,11 +625,13 @@
         function openLightbox(imageSrc) {
             lightboxImg.src = imageSrc;
             lightbox.classList.add('active');
+            if (!promiseMade && document.body.style.overflow === 'hidden') return; // protect promise state
             document.body.style.overflow = 'hidden'; 
         }
 
         function closeLightbox() {
             lightbox.classList.remove('active');
+            if (!promiseMade) return; // Keep locked if promise is not fulfilled
             document.body.style.overflow = 'auto'; 
         }
 
@@ -752,6 +757,11 @@
         document.getElementById('confirmBtn').addEventListener('click', () => {
             if (!hasSigned) { alert("Please sign first! ❤️"); return; }
             
+            // Re-enable page processing/scrolling completely
+            promiseMade = true;
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+            
             // Get Image Data
             const dataUrl = signCanvas.toDataURL();
             document.getElementById('certSigImg').src = dataUrl;
@@ -760,7 +770,7 @@
             const today = new Date();
             document.getElementById('certDateTxt').innerText = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
-            // Swap UI
+            // Swap UI Components elegantly
             document.getElementById('sigBox').classList.add('hidden');
             setTimeout(() => {
                 document.getElementById('certBox').classList.add('active');
@@ -773,17 +783,15 @@
             const certElement = document.getElementById('certBorder');
             const btn = document.getElementById('downloadPdfBtn');
             
-            // Visual feedback
             btn.innerText = "Generating PDF... ⏳";
             
             html2canvas(certElement, {
-                scale: 2, // High resolution
-                backgroundColor: '#080312' // Force solid background for PDF
+                scale: 2, 
+                backgroundColor: '#080312' 
             }).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
                 const { jsPDF } = window.jspdf;
                 
-                // Calculate dimensions
                 const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width, canvas.height] });
                 pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
                 pdf.save('Forever_Promise_Swathi_Nithya.pdf');
@@ -809,9 +817,10 @@
         const neonTextEl = document.getElementById('neonPopText');
         let currentCardTrigger = -1;
 
-        // --- SCROLL ANIMATIONS (SHUFFLE & HORIZON) ---
+        // --- SCROLL ANIMATIONS (SHUFFLE & HORIZON & SCROLL FREEZER) ---
         window.addEventListener('scroll', () => {
-            
+            if (promiseMade) return; // Completely ignore tracking or adjustments once promise is checked off.
+
             // 1. Photo Shuffle Logic
             const shuffleSection = document.querySelector('.photo-shuffle-section');
             if (shuffleSection) {
@@ -822,12 +831,11 @@
                 
                 const step = 1 / totalCards;
                 
-                // Trigger Text Pops
                 let activeCardIndex = Math.floor(scrollPercent / step);
                 if (activeCardIndex !== currentCardTrigger && activeCardIndex < totalCards) {
                     neonTextEl.innerText = popWords[activeCardIndex];
                     neonTextEl.classList.remove('animate');
-                    void neonTextEl.offsetWidth; // forces browser reflow
+                    void neonTextEl.offsetWidth; 
                     neonTextEl.classList.add('animate');
                     currentCardTrigger = activeCardIndex;
                 }
@@ -874,12 +882,19 @@
             }
         });
 
-        // --- OBSERVERS FOR FADE-INS ---
+        // --- OBSERVERS FOR FADE-INS & INTERACTIVE PROMISE LOCK ---
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                     
+                    // SPECIAL TRIGGER: Lock Viewport Scroll when hitting the Promise Section
+                    if(entry.target.id === 'promiseSec' && !promiseMade) {
+                        document.body.style.overflow = 'hidden';
+                        document.documentElement.style.overflow = 'hidden';
+                        entry.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+
                     const timedItems = entry.target.querySelectorAll('[data-delay], .apology-text');
                     timedItems.forEach(item => {
                         const delay = item.getAttribute('data-delay');
@@ -897,12 +912,28 @@
                     }
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.4 }); // Height tracking safety window margin
 
-        ['sincere', 'funnyGrid', 'checklist', 'apologySec', 'mainMessage', 'farewell'].forEach(id => {
+        ['sincere', 'funnyGrid', 'checklist', 'apologySec', 'mainMessage', 'promiseSec', 'farewell'].forEach(id => {
             const el = document.getElementById(id);
             if(el) scrollObserver.observe(el);
         });
+
+        // --- BACKGROUND EMBERS GENERATION ---
+        const emberField = document.getElementById('emberField');
+        if (emberField) {
+            const emberCount = window.innerWidth > 768 ? 30 : 15;
+            for (let i = 0; i < emberCount; i++) {
+                const e = document.createElement('div');
+                e.className = 'ember';
+                const size = Math.random() * 4 + 2 + 'px';
+                e.style.width = size; e.style.height = size;
+                e.style.left = Math.random() * 100 + 'vw';
+                e.style.setProperty('--duration', Math.random() * 5 + 5 + 's');
+                e.style.animationDelay = Math.random() * 5 + 's';
+                emberField.appendChild(e);
+            }
+        }
 
         // --- STARFIELD ENGINE FOR FINAL SECTION ---
         const canvas = document.getElementById('starCanvas');
